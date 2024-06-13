@@ -15,6 +15,7 @@
 #include <cassert>
 #include <cstdio>
 #include <iostream>
+#include <limits>
 
 using namespace std;
 
@@ -123,8 +124,8 @@ pma::Interface::SumResult PackedMemoryArray::sum(int64_t min, int64_t max) const
     }
 
     // find the last element
-    sum.m_last_key = numeric_limits<int64_t>::min();
-    while(sum.m_last_key == numeric_limits<int64_t>::min() && end > start){
+    sum.m_last_key = std::numeric_limits<int64_t>::min();
+    while(sum.m_last_key == std::numeric_limits<int64_t>::min() && end > start){
         if(present[end -1]){
             sum.m_last_key = impl[end -1].first;
         } else {

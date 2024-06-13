@@ -24,6 +24,7 @@
 #include <cstdlib> // free, posix_memalign
 #include <iomanip>
 #include <iostream>
+#include <limits>
 
 #include "miscellaneous.hpp"
 
@@ -579,7 +580,7 @@ unique_ptr<pma::Iterator> ART::find(int64_t min, int64_t max) const {
 }
 
 unique_ptr<pma::Iterator> ART::iterator() const {
-    return leaf_iterator(m_first, numeric_limits<int64_t>::min(), numeric_limits<int64_t>::max());
+    return leaf_iterator(m_first, std::numeric_limits<int64_t>::min(), std::numeric_limits<int64_t>::max());
 }
 
 /*****************************************************************************
@@ -685,7 +686,7 @@ void ART::dump_leaves() const {
     size_t i = 0;
     Leaf* leaf = m_first;
 #if !defined(NDEBUG)
-    int64_t key_previous = numeric_limits<int64_t>::min();
+    int64_t key_previous = std::numeric_limits<int64_t>::min();
 #endif
 
     while(leaf != nullptr){
