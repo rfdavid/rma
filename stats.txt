@@ -1,0 +1,180 @@
+Insertions (first bar):
+Elements: 107374182
+
+Baseline
+========
+
+Uniform
+  ./pmacomp -e step_insert_lookup -I 200100100 -d uniform -a btree_pma_v2 -b 64 -l 32 -v
+  Total time: 71118, 71718
+
+Sequential:
+  ./pmacomp -e step_insert_lookup -I 200100100 -d apma_sequential -a btree_pma_v2 -b 64 -l 32 -v
+  Total time: 285026
+
+Zipfian 1:
+  ./pmacomp -e step_insert_lookup -I 200100100 -d zipf --alpha 1 --beta 134217728 -a btree_pma_v2 -b 64 -l 32 -v
+  Total time: 123960
+
+Zipfian 1.5:
+  ./pmacomp -e step_insert_lookup -I 200100100 -d zipf --alpha 1.5 --beta 134217728 -a btree_pma_v2 -b 64 -l 32 -v
+  Total time: 244716
+
+Scan
+  ./pmacomp -e range_query -I 200100100 -L 1024 --rqint 0.01 -d uniform -a btree_pma_v2 -b 64 -l 32 -v
+  Total time: 5.0
+
+
+SLH17
+=====
+
+Uniform
+  ./pmacomp -e step_insert_lookup -I 200100100 -d uniform -a pma_sha -v
+  Total time: 146871, 150574
+
+Sequential:
+  ./pmacomp -e step_insert_lookup -I 200100100 -d apma_sequential -a pma_sha -v
+  Total time: 549833, 547891
+
+Zipfian 1:
+  ./pmacomp -e step_insert_lookup -I 200100100 -d zipf --alpha 1 --beta 134217728 -a pma_sha -v
+  Total time: 270295
+
+Zipfian 1.5:
+  ./pmacomp -e step_insert_lookup -I 200100100 -d zipf --alpha 1.5 --beta 134217728 -a pma_sha -v
+  Total time: 448946
+
+Scan
+  ./pmacomp -e range_query -I 200100100 -L 1024 --rqint 0.01 -d uniform -a pma_sha -v
+  Total time: 16.156
+
+PM14
+====
+
+Uniform:
+  ./pmacomp -e step_insert_lookup -I 200100100 -d uniform -a pma_pabmont -v
+  Total time: 186986
+
+Sequential:
+  ./pmacomp -e step_insert_lookup -I 200100100 -d apma_sequential -a pma_pabmont -v
+  Total time: 325145
+
+Zipfian 1:
+  ./pmacomp -e step_insert_lookup -I 200100100 -d zipf --alpha 1 --beta 134217728 -a pma_pabmont -v
+  Total time: 211793
+
+Zipfian 1.5:
+  ./pmacomp -e step_insert_lookup -I 200100100 -d zipf --alpha 1.5 --beta 134217728 -a pma_pabmont -v
+  Total time: 260038
+
+Scan:
+  ./pmacomp -e range_query -I 200100100 -L 1024 --rqint 0.01 -d uniform -a pma_pabmont -v
+  Total time: 14.907
+
+
+Rui
+===
+
+v2: use sentinel -1 instead of std::optional std::nullopt
+v3: rollback to std::nullopt
+v4: upper threshold is 0.75 instead of the previous calculated 
+
+Uniform:
+  ./pmacomp -e step_insert_lookup -I 200100100 -d uniform -a pma_drui -v
+  Total time (v1): 192383, 191182
+  Total time (v2): 152102
+  Total time (v3): 179099,182098
+  Total time (v4): 412881, 390184
+
+Sequential:
+  ./pmacomp -e step_insert_lookup -I 200100100 -d apma_sequential -a pma_drui -v
+  Total time (v1): 311381, 310583
+  Total time (v2): 380970
+  Total time (v3): 266645, 268642
+  Total time (v4): 
+
+Zipfian 1:
+  ./pmacomp -e step_insert_lookup -I 200100100 -d zipf --alpha 1 --beta 134217728 -a pma_drui -v
+  Total time (v1): 310583
+  Total time (v2): 374670
+  Total time (v3): 265855
+  Total time (v4): 
+
+Zipfian 1.5:
+  ./pmacomp -e step_insert_lookup -I 200100100 -d zipf --alpha 1.5 --beta 134217728 -a pma_drui -v
+  Total time (v1): 312439
+  Total time (v2): 395932
+  Total time (v3): 265580, 273152
+  Total time (v4): 
+
+Scan
+  ./pmacomp -e range_query -I 200100100 -L 1024 --rqint 0.01 -d uniform -a pma_drui -v
+  Total time: 12.233
+
+
+KLS17
+=====
+
+Uniform:
+  ./pmacomp -e step_insert_lookup -I 200100100 -d uniform -a pma_khayyat -v
+  Total time: 308343
+
+Sequential:
+  ./pmacomp -e step_insert_lookup -I 200100100 -d apma_sequential -a pma_khayyat -v
+  Total time: 671530
+
+Zipfian 1:
+  ./pmacomp -e step_insert_lookup -I 200100100 -d zipf --alpha 1 --beta 134217728 -a pma_khayyat -v
+  Total time: 434878
+
+Zipfian 1.5:
+  ./pmacomp -e step_insert_lookup -I 200100100 -d zipf --alpha 1.5 --beta 134217728 -a pma_khayyat -v
+  Total time: 589232
+
+Scan
+  ./pmacomp -e range_query -I 200100100 -L 1024 --rqint 0.01 -d uniform -a pma_khayyat -v
+  Total time: 6.04
+
+
+Menghani 2
+========
+
+./pmacomp -e step_insert_lookup -I 200100100 -d uniform -a pma_menghani2 -v
+
+Total time: 305653
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+sha
+
+# Insert time: 245809 millisecs
+Interval: 0.01, lookups: 1024, elapsed time: 16.382 seconds
+

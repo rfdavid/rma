@@ -27,6 +27,36 @@
 
 namespace pma {
 
+
+/*****************************************************************************
+ *                                                                           *
+ *   rfdavid (drui) pma.hpp                                                  *
+ *                                                                           *
+ *****************************************************************************/
+
+class PMA_Drui : public Interface {
+private:
+    void* impl_r;
+
+public:
+    PMA_Drui(std::uint64_t capacity = 64);
+
+    virtual ~PMA_Drui();
+
+    virtual void insert(int64_t key, int64_t value);
+
+    virtual int64_t find(int64_t key) const;
+
+    virtual std::size_t size() const;
+
+    // not implemented
+    virtual pma::Interface::SumResult sum(int64_t min, int64_t max) const;
+
+    std::unique_ptr<Iterator> iterator() const;
+
+    virtual void dump() const;
+};
+
 /*****************************************************************************
  *                                                                           *
  *   Gaurav Menghani / impl1.hpp                                             *

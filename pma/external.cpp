@@ -25,6 +25,121 @@
 
 /*****************************************************************************
  *                                                                           *
+ *   Drui                                                                    *
+ *                                                                           *
+ *****************************************************************************/
+
+#include "external/drui/pma.hpp"
+
+namespace pma {
+
+namespace detail_drui {
+
+struct Element : public std::pair<int64_t, int64_t> {
+    Element() { }
+    Element(int64_t k, int64_t v) : std::pair<int64_t, int64_t>(k, v) { }
+    bool operator == (const Element& e){ return first == e.first; }
+    bool operator != (const Element& e){ return ! operator ==(e); }
+    bool operator < (const Element& e){ return first < e.first; }
+    bool operator > (const Element& e){ return ! operator <(e); }
+};
+
+std::ostream& operator<< (std::ostream& o, const Element& e){
+    o << "<" << e.first << ", " << e.second << ">";
+    return o;
+}
+
+using PMA_t = drui::PackedMemoryArray;
+
+class IteratorImpl : public pma::Iterator {
+    friend class ::pma::PMA_Drui;
+    PMA_t& pma;
+    int pos;
+
+    IteratorImpl(PMA_t& pma);
+    void move();
+
+public:
+    bool hasNext() const;
+    std::pair<int64_t, int64_t> next();
+};
+
+IteratorImpl::IteratorImpl(PMA_t& pma): pma(pma), pos(0) {
+    move();
+}
+
+void IteratorImpl::move() {
+    while(pos < pma.size() && !pma.elemExistsAt(pos)) pos++;
+}
+
+
+bool IteratorImpl::hasNext() const{
+    return pos < pma.size();
+}
+
+std::pair<int64_t, int64_t> IteratorImpl::next(){
+    assert(hasNext());
+    auto p = pma.elemAt(pos);
+    pos++; move();
+    return std::make_pair(p, 0);
+}
+
+
+} // namespaced detail_drui
+
+#define IMPL reinterpret_cast<detail_drui::PMA_t*>(impl_r)
+
+PMA_Drui::PMA_Drui(uint64_t capacity) : impl_r(new detail_drui::PMA_t(capacity)){
+}
+
+
+// PMA_Drui::PMA_Drui() : impl_r(nullptr){
+//     impl_r = new detail_drui::PMA_t{ detail_drui::Element{ 0, 0 } };
+// }
+
+PMA_Drui::~PMA_Drui() {
+    delete IMPL; impl_r = nullptr;
+}
+
+void PMA_Drui::insert(int64_t key, int64_t value){
+    IMPL->insertElement(key, value);
+}
+
+int64_t PMA_Drui::find(int64_t key) const {
+    detail_drui::Element dummy{key, -1};
+    auto index = IMPL->binarySearchPMA(key);
+    if(index >= 0){
+        return IMPL->elemAt(index);
+    } else {
+        return -1;
+    }
+}
+
+std::size_t PMA_Drui::size() const {
+    return IMPL->size();
+}
+
+void PMA_Drui::dump() const {
+    IMPL->print();
+}
+
+std::unique_ptr<pma::Iterator> PMA_Drui::iterator() const {
+    std::unique_ptr<pma::Iterator> ptr(new detail_drui::IteratorImpl(*(IMPL)));
+    return ptr;
+}
+
+pma::Interface::SumResult PMA_Drui::sum(int64_t min, int64_t max) const {
+  return IMPL->sum(min, max);
+ //    RAISE_EXCEPTION(Exception, "Method ::sum(int64_t min, int64_t max) not implemented!");
+}
+
+#undef IMPL
+
+} // namespace pma
+
+
+/*****************************************************************************
+ *                                                                           *
  *   Gaurav Menghani / impl1.hpp                                             *
  *                                                                           *
  *****************************************************************************/
@@ -133,6 +248,7 @@ pma::Interface::SumResult PMA_Menghani_1::sum(int64_t min, int64_t max) const {
 #undef IMPL
 
 } // namespace pma
+
 /*****************************************************************************
  *                                                                           *
  *   Gaurav Menghani / impl2.hpp                                             *

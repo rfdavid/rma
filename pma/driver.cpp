@@ -67,6 +67,8 @@
 #include "external/sha/pma.hpp"
 #include "sequential/pma_v4.hpp"
 
+#include "external/drui/pma.hpp"
+
 using namespace std;
 
 namespace pma {
@@ -84,6 +86,9 @@ void initialise() {
     /**
      * Basic PMA implementations
      */
+    REGISTER_PMA("pma_drui", "GitHub implementation by rfdavid", [](){
+        return make_unique<PMA_Drui>();
+    });
     REGISTER_PMA("pma_jraizes", "GitHub implementation by Justin Raizes", [](){
         return make_unique<PMA_Raizes>();
     });
