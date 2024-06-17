@@ -90,7 +90,7 @@ Sequential:
   ./pmacomp -e step_insert_lookup -I 200100100 -d apma_sequential -a pma_drui -v
   Total time (v1): 311381, 310583
   Total time (v2): 380970
-  Total time (v3): 266645, 268642
+  Total time (v3): 266645, 268642, 270847
   Total time (v4): 
 
 Zipfian 1:
