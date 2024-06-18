@@ -21,7 +21,7 @@ namespace drui {
 
   class PackedMemoryArray {
     public:
-      std::vector<std::optional<std::pair<int, int>>> data;
+      std::vector<std::optional<std::pair<int64_t, int64_t>>> data;
       uint64_t segmentSize;
       uint64_t capacity;
       uint64_t totalElements = 0;
