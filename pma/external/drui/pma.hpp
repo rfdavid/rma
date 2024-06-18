@@ -142,7 +142,7 @@ namespace drui {
         }
       }
 
-      void insertElement(int key, int value, uint64_t index) {
+      void insertElement(int64_t key, int64_t value, uint64_t index) {
         // data[index] = value;
         data[index] = std::make_pair(key, value);
         totalElements++;
@@ -421,7 +421,7 @@ namespace drui {
         }
       }
 
-      void insertElement(int key, int value) {
+      void insertElement(int64_t key, int64_t value) {
 //        std::cout << "---------- key: " << key << ", value: " << value << std::endl;
 
         uint64_t mid = binarySearchPMA(key);
