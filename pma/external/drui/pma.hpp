@@ -37,7 +37,7 @@ namespace drui {
 
       PackedMemoryArray(uint64_t capacity) : capacity(capacity) {
         segmentSize = std::pow(2, std::ceil(log2(static_cast<double>(log2(capacity)))));
-        data = std::vector<std::optional<std::pair<int, int>>>(capacity, std::nullopt);
+        data = std::vector<std::optional<std::pair<int64_t, int64_t>>>(capacity, std::nullopt);
         // data = std::vector<std::optional<int>>(capacity, std::nullopt);
       }
 
