@@ -100,7 +100,7 @@ namespace drui {
 
         // from rma implementation:
         double diff = (((double) height) - level) / height;
-        return ph + 0.25 * diff;
+        return th + 0.25 * diff;
 
         //            return th + (t1 - th) * (height - level) / height;
       }
