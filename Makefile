@@ -7,37 +7,37 @@ builddir := .
 objectdir := objects
 
 # Current position
-srcdir := @srcdir@
-VPATH := @srcdir@
-top_srcdir := @top_srcdir@
+srcdir := .
+VPATH := .
+top_srcdir := .
 
 # Installation paths
-prefix := @prefix@
-exec_prefix := @exec_prefix@
-libdir := @libdir@
+prefix := /usr/local
+exec_prefix := ${prefix}
+libdir := ${exec_prefix}/lib
 
 # Subdirectories
-subdirs := @subdirs@ @subdirs_extra@
+subdirs := @subdirs@ 
 
 # Compiler programs & flags
 # !!! It assumes that ${top_srcdir} has been defined in the container file !!!
 AR := ar
 AR_FLAGS := rcsPT
-CC := @CC@
-CXX := @CXX@
-CPPFLAGS := @CPPFLAGS@ 
-EXTRA_CPPFLAGS := @EXTRA_CPPFLAGS@ # extra flags defined by autoconf, similar to AM_CPPFLAGS
-SRC_CPPFLAGS := -I@top_srcdir@/
+CC := clang
+CXX := clang++ -std=gnu++20
+CPPFLAGS :=  
+EXTRA_CPPFLAGS :=  # extra flags defined by autoconf, similar to AM_CPPFLAGS
+SRC_CPPFLAGS := -I./
 ALL_CPPFLAGS := ${CPPFLAGS} ${EXTRA_CPPFLAGS} ${SRC_CPPFLAGS}
-CFLAGS := @CFLAGS@
-EXTRA_CFLAGS := @EXTRA_CFLAGS@ # extra flags defined by autoconf, similar to AM_CFLAGS
+CFLAGS := -g -fno-limit-debug-info -fno-omit-frame-pointer -Wall -Wno-sign-compare -O0
+EXTRA_CFLAGS :=  # extra flags defined by autoconf, similar to AM_CFLAGS
 ALL_CFLAGS := ${ALL_CPPFLAGS} ${EXTRA_CFLAGS} ${CFLAGS}
-CXXFLAGS := @CXXFLAGS@
-EXTRA_CXXFLAGS := @EXTRA_CXXFLAGS@ # extra flags defined by autoconf, similar to AM_CXXFLAGS
+CXXFLAGS := -g -fno-limit-debug-info -fno-omit-frame-pointer -Wall -Wno-sign-compare -Wno-overloaded-virtual -O0
+EXTRA_CXXFLAGS :=  # extra flags defined by autoconf, similar to AM_CXXFLAGS
 ALL_CXXFLAGS := ${ALL_CPPFLAGS} ${EXTRA_CXXFLAGS} ${CXXFLAGS}
 
 # Linker
-LIBS := @LIBS@
+LIBS := -ldl -lpthread -latomic  
 LDFLAGS := ${LIBS}
 
 #############################################################################
@@ -127,11 +127,11 @@ sources := \
 	pma/experiments/step_insert_lookup.cpp \
 	pma/experiments/step_insert_scan.cpp \
 	pma/external/dfr/dfr.cpp \
-	pma/external/drui/pma_index.cpp \
 	pma/external/iejoin/khayyat.cpp \
 	pma/external/montes/pma.c \
 	pma/external/raizes/pkd_mem_arr.c \
 	pma/external/sha/pma.cpp \
+	pma/external/drui/pma_index.cpp \
 	pma/generic/static_index.cpp \
 	pma/sequential/pma_v4.cpp \
 	third-party/art/Tree.cpp \

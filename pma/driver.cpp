@@ -67,7 +67,7 @@
 #include "external/sha/pma.hpp"
 #include "sequential/pma_v4.hpp"
 
-#include "external/drui/pma.hpp"
+#include "external/drui/pma_index.hpp"
 
 using namespace std;
 

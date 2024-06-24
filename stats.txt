@@ -77,7 +77,9 @@ Rui
 
 v2: use sentinel -1 instead of std::optional std::nullopt
 v3: rollback to std::nullopt
-v4: upper threshold is 0.75 instead of the previous calculated 
+v4: upper threshold is 0.75 instead of the previous calculated
+v5: fix threshold
+v6: using index
 
 Uniform:
   ./pmacomp -e step_insert_lookup -I 200100100 -d uniform -a pma_drui -v
@@ -85,31 +87,42 @@ Uniform:
   Total time (v2): 152102
   Total time (v3): 179099,182098
   Total time (v4): 412881, 390184
+  Total time (v5): 180609
+  Total time (v6): 107096
 
 Sequential:
   ./pmacomp -e step_insert_lookup -I 200100100 -d apma_sequential -a pma_drui -v
   Total time (v1): 311381, 310583
   Total time (v2): 380970
   Total time (v3): 266645, 268642, 270847
-  Total time (v4): 
+  Total time (v4):
+  Total time (v5): 447416
+  Total time (v6): 552596
 
 Zipfian 1:
   ./pmacomp -e step_insert_lookup -I 200100100 -d zipf --alpha 1 --beta 134217728 -a pma_drui -v
   Total time (v1): 310583
   Total time (v2): 374670
   Total time (v3): 265855
-  Total time (v4): 
+  Total time (v4):
+  Total time (v5): 447311
+  Total time (v6): 551703
 
 Zipfian 1.5:
   ./pmacomp -e step_insert_lookup -I 200100100 -d zipf --alpha 1.5 --beta 134217728 -a pma_drui -v
   Total time (v1): 312439
   Total time (v2): 395932
   Total time (v3): 265580, 273152
-  Total time (v4): 
+  Total time (v4):
+  Total time (v5): 452099
+  Total time (v6): 
+
 
 Scan
   ./pmacomp -e range_query -I 200100100 -L 1024 --rqint 0.01 -d uniform -a pma_drui -v
   Total time: 12.233
+  Total time (v5): 6.762
+  Total time (v6): 
 
 
 KLS17

@@ -29,7 +29,7 @@
  *                                                                           *
  *****************************************************************************/
 
-#include "external/drui/pma.hpp"
+#include "external/drui/pma_index.hpp"
 
 namespace pma {
 
@@ -106,13 +106,14 @@ void PMA_Drui::insert(int64_t key, int64_t value){
 }
 
 int64_t PMA_Drui::find(int64_t key) const {
-    detail_drui::Element dummy{key, -1};
-    auto index = IMPL->binarySearchPMA(key);
-    if(index >= 0){
-        return IMPL->elemAt(index);
-    } else {
-        return -1;
-    }
+     RAISE_EXCEPTION(Exception, "Method ::find not implemented!");
+//    detail_drui::Element dummy{key, -1};
+//    auto index = IMPL->binarySearchPMA(key);
+//    if(index >= 0){
+//        return IMPL->elemAt(index);
+//    } else {
+//        return -1;
+//    }
 }
 
 std::size_t PMA_Drui::size() const {
@@ -120,7 +121,8 @@ std::size_t PMA_Drui::size() const {
 }
 
 void PMA_Drui::dump() const {
-    IMPL->print();
+     RAISE_EXCEPTION(Exception, "Method ::dump not implemented!");
+//    IMPL->print();
 }
 
 std::unique_ptr<pma::Iterator> PMA_Drui::iterator() const {
@@ -129,8 +131,8 @@ std::unique_ptr<pma::Iterator> PMA_Drui::iterator() const {
 }
 
 pma::Interface::SumResult PMA_Drui::sum(int64_t min, int64_t max) const {
-  return IMPL->sum(min, max);
- //    RAISE_EXCEPTION(Exception, "Method ::sum(int64_t min, int64_t max) not implemented!");
+ // return IMPL->sum(min, max);
+     RAISE_EXCEPTION(Exception, "Method ::sum(int64_t min, int64_t max) not implemented!");
 }
 
 #undef IMPL
