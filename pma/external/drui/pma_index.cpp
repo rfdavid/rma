@@ -1,6 +1,3 @@
-#ifndef IMPLR_HPP_
-#define IMPLR_HPP_
-
 #include "pma_index.hpp"
 
 #define INDEX reinterpret_cast<DynamicIndex<int64_t, uint64_t>*>(index)
@@ -9,7 +6,7 @@ namespace drui {
 
 /* Initialize PMA structure */
 
-PMA::PMA(size_t segmentSize) : segmentCapacity(hyperceil(segmentSize)) {
+PMA::PMA(size_t segmentSize) : segmentCapacity(hyperceil2(segmentSize)) {
     // TODO: check segmentSize
     // total initial capacity = segment capacity
     capacity = segmentCapacity;

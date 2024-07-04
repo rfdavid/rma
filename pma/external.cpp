@@ -69,7 +69,8 @@ IteratorImpl::IteratorImpl(PMA_t& pma): pma(pma), pos(0) {
 }
 
 void IteratorImpl::move() {
-    while(pos < pma.size() && !pma.elemExistsAt(pos)) pos++;
+    RAISE_EXCEPTION(Exception, "Method ::move not implemented!");
+//    while(pos < pma.size() && !pma.elemExistsAt(pos)) pos++;
 }
 
 
@@ -78,10 +79,11 @@ bool IteratorImpl::hasNext() const{
 }
 
 std::pair<int64_t, int64_t> IteratorImpl::next(){
-    assert(hasNext());
-    auto p = pma.elemAt(pos);
-    pos++; move();
-    return std::make_pair(p, 0);
+    RAISE_EXCEPTION(Exception, "Method ::next not implemented!");
+//    assert(hasNext());
+//    auto p = pma.elemAt(pos);
+//    pos++; move();
+//    return std::make_pair(p, 0);
 }
 
 

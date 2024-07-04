@@ -4,11 +4,14 @@
 #include <memory> // unique_ptr
 #include <vector>
 
-#include "../generic/dynamic_index.hpp"
+#include "dynamic_index.hpp"
 
 namespace drui {
 
-size_t hyperceil(size_t value);
+static size_t hyperceil2(size_t value) {
+    return (size_t) pow(2, ceil(log2(static_cast<double>(value))));
+}
+
 
 struct PMA {
     int64_t* keys;
